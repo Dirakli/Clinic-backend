@@ -52,9 +52,9 @@ namespace Clinic.Helper
          new Claim("private_number", user.private_number),
 
          new Claim("category", user.category),
-         new Claim("photo", user.photo),
-         new Claim("resume", user.resume)
-    };
+         new Claim("photo", user.photo ?? string.Empty),
+         new Claim("resume", user.resume ?? string.Empty)
+        };
             var jwtToken = new JwtSecurityToken(
                 claims: claims,
                 notBefore: DateTime.UtcNow,

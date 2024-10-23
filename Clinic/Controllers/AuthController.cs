@@ -58,6 +58,10 @@ namespace Clinic.Controllers
                 {
                     return BadRequest("Name not valid");
                 }
+                if (request.role == "doctor")
+                {
+                    return BadRequest("You can't registered as doctor");
+                }
                 string passwordHash = BCrypt.Net.BCrypt.HashPassword(request.password);
                 request.password = passwordHash;
                 string photoFileName = null;
@@ -116,7 +120,7 @@ namespace Clinic.Controllers
                 await emailService.SendEmailAsync(request.email, token, request.name);
 
                 //User createUser = auth_pkg.AddUser(newUser);
-                return StatusCode(200, new { user = "Check your mail" });
+                return StatusCode(200, new { message="Check your email" });
             }
             catch (Exception ex)
             {
